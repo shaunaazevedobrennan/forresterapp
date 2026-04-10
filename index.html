@@ -3,513 +3,770 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forrester Wave Q2 2026 — Workvivo Sales Playbook</title>
+<!-- Security declaration: this page makes NO external network requests.
+     All scripts and styles are self-contained inline. No data is collected,
+     tracked, or transmitted. Safe for external/public use. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline';">
+<meta name="author" content="Workvivo by Zoom">
+<meta name="description" content="Workvivo vendor comparison tool based on the publicly published Forrester Wave™: Intranet Platforms, Q2 2026 report. Created by Workvivo. Contains no tracking, no external requests, and no user data collection.">
+<meta name="classification" content="Public — External Facing Sales Asset">
+<meta name="robots" content="noindex">
+<title>Forrester Wave™ — Workvivo Interactive Scoring</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --wv-blue: #1a56db;
+    --wv-blue-dark: #1e40af;
+    --wv-blue-light: #dbeafe;
+    --leader: #15803d;
+    --leader-bg: #dcfce7;
+    --strong: #c2410c;
+    --strong-bg: #ffedd5;
+    --contender: #7c3aed;
+    --contender-bg: #ede9fe;
+    --gold: #b45309;
+    --gold-bg: #fef3c7;
+    --score5: #15803d;
+    --score3: #374151;
+    --score1: #dc2626;
+    --bg: #f1f5f9;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --sub: #64748b;
+  }
+
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #f4f5f7;
-    color: #1a1a2e;
-    padding: 32px 20px;
-  }
-  .container { max-width: 860px; margin: 0 auto; }
-
-  /* Header */
-  .header {
-    background: linear-gradient(135deg, #1a237e 0%, #283593 60%, #1565c0 100%);
-    border-radius: 16px;
-    padding: 32px 36px;
-    color: white;
-    margin-bottom: 24px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::after {
-    content: '';
-    position: absolute;
-    right: -40px; top: -40px;
-    width: 220px; height: 220px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.06);
-  }
-  .header-eyebrow {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #90caf9;
-    margin-bottom: 8px;
-  }
-  .header h1 { font-size: 26px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
-  .header-sub { font-size: 15px; color: #bbdefb; line-height: 1.5; }
-
-  /* Ranking banner */
-  .ranking-strip {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-  }
-  .rank-card {
-    flex: 1;
-    min-width: 140px;
-    background: white;
-    border-radius: 12px;
-    padding: 18px 20px;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    border-top: 4px solid #1565c0;
-  }
-  .rank-card.gold { border-top-color: #f9a825; }
-  .rank-card.green { border-top-color: #2e7d32; }
-  .rank-card.gap  { border-top-color: #e53935; }
-  .rank-num { font-size: 36px; font-weight: 800; color: #1a237e; line-height: 1; }
-  .rank-num.big { font-size: 28px; color: #f9a825; }
-  .rank-label { font-size: 12px; color: #666; margin-top: 4px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-  .rank-detail { font-size: 13px; color: #333; margin-top: 6px; font-weight: 600; }
-
-  /* Section titles */
-  .section-title {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #1565c0;
-    margin-bottom: 12px;
-    margin-top: 28px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
   }
 
-  /* Leaderboard */
-  .leaderboard {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    margin-bottom: 24px;
-  }
-  .lb-row {
+  /* ─── HEADER ──────────────────────────────────────── */
+  .app-header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a56db 100%);
+    padding: 20px 28px 16px;
     display: flex;
     align-items: center;
-    padding: 10px 20px;
-    border-bottom: 1px solid #f0f0f0;
-    gap: 14px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
   }
-  .lb-row:last-child { border-bottom: none; }
-  .lb-row.workvivo { background: #e8f0fe; }
-  .lb-row.leader-tag { background: #f9fbe7; }
-  .lb-pos { width: 28px; font-size: 14px; font-weight: 700; color: #888; text-align: center; }
-  .lb-pos.top { color: #1a237e; }
-  .lb-name { flex: 1; font-size: 14px; font-weight: 600; }
-  .lb-name.wv { color: #1565c0; }
-  .lb-score { font-size: 14px; font-weight: 700; color: #333; width: 40px; text-align: right; }
-  .lb-badge {
-    font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
-    padding: 3px 8px; border-radius: 20px; text-transform: uppercase;
-  }
-  .badge-leader { background: #e8f5e9; color: #2e7d32; }
-  .badge-strong { background: #fff3e0; color: #e65100; }
-  .badge-contender { background: #fce4ec; color: #c62828; }
-  .lb-bar-wrap { width: 120px; }
-  .lb-bar { height: 6px; border-radius: 3px; background: #e0e0e0; }
-  .lb-bar-fill { height: 100%; border-radius: 3px; background: #90caf9; }
-  .lb-bar-fill.wv { background: #1565c0; }
-
-  /* How-to steps */
-  .steps {
-    background: white;
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    margin-bottom: 24px;
-  }
-  .step { display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start; }
-  .step:last-child { margin-bottom: 0; }
-  .step-num {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: #1565c0; color: white;
-    font-size: 13px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; margin-top: 1px;
-  }
-  .step-text { font-size: 14px; line-height: 1.5; color: #333; }
-  .step-text strong { color: #1a237e; }
-
-  /* Persona cards */
-  .persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-  @media (max-width: 600px) { .persona-grid { grid-template-columns: 1fr; } }
-  .persona-card {
-    background: white;
-    border-radius: 12px;
-    padding: 22px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-  }
-  .persona-header {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 16px;
-  }
-  .persona-icon {
-    width: 38px; height: 38px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
-  .icon-hr { background: #e8f5e9; }
-  .icon-it { background: #e3f2fd; }
-  .persona-title { font-size: 15px; font-weight: 700; color: #1a237e; }
-  .persona-sub { font-size: 12px; color: #888; }
-
-  .tag-label { font-size: 11px; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-  .tag {
-    font-size: 12px; font-weight: 600; padding: 4px 10px;
-    border-radius: 20px;
-  }
-  .tag-high { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
-  .tag-watch { background: #fff8e1; color: #e65100; border: 1px solid #ffe082; }
-
-  .tip-box {
-    background: #f3f8ff;
-    border-left: 3px solid #1565c0;
-    border-radius: 0 8px 8px 0;
-    padding: 10px 14px;
-    font-size: 13px;
-    color: #333;
-    line-height: 1.5;
-  }
-  .tip-box strong { color: #1565c0; }
-
-  .warn-box {
-    background: #fff8e1;
-    border-left: 3px solid #f9a825;
-    border-radius: 0 8px 8px 0;
-    padding: 10px 14px;
-    font-size: 13px;
-    color: #333;
-    line-height: 1.5;
-    margin-top: 12px;
-  }
-  .warn-box strong { color: #e65100; }
-
-  /* Score table */
-  .score-table-wrap {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    margin-bottom: 24px;
-  }
-  table { width: 100%; border-collapse: collapse; }
-  th {
-    background: #1a237e; color: white;
-    font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
-    text-transform: uppercase; padding: 10px 14px; text-align: left;
-  }
-  td { padding: 9px 14px; font-size: 13px; border-bottom: 1px solid #f0f0f0; }
-  tr:last-child td { border-bottom: none; }
-  tr:nth-child(even) td { background: #fafafa; }
-  .score-5 { font-weight: 700; color: #2e7d32; }
-  .score-3 { font-weight: 600; color: #555; }
-  .score-1 { font-weight: 700; color: #c62828; }
-  .wt { color: #888; font-size: 12px; }
-
-  /* App callout */
-  .app-callout {
-    background: white;
-    border-radius: 12px;
-    padding: 20px 24px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    margin-bottom: 24px;
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .wv-logo {
+    flex-shrink: 0;
     display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    border: 2px solid #1565c0;
+    align-items: center;
   }
-  .app-callout-icon {
-    width: 48px; height: 48px;
-    background: #e8f0fe;
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
+  .wv-logo svg {
+    height: 30px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+  .header-title { color: white; font-size: 18px; font-weight: 700; line-height: 1.2; }
+  .header-sub { color: #93c5fd; font-size: 12px; margin-top: 2px; }
+  .header-badge {
+    background: rgba(255,255,255,0.12);
+    color: #bfdbfe;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    letter-spacing: 0.3px;
+  }
+
+  /* ─── PRESET BAR ──────────────────────────────────── */
+  .preset-bar {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .preset-label { font-size: 11px; font-weight: 700; color: var(--sub); text-transform: uppercase; letter-spacing: 1px; margin-right: 4px; }
+  .preset-btn {
+    display: flex; align-items: center; gap: 7px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    background: white;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    transition: all 0.15s;
+  }
+  .preset-btn:hover { border-color: var(--wv-blue); color: var(--wv-blue); background: var(--wv-blue-light); }
+  .preset-btn.active { border-color: var(--wv-blue); background: var(--wv-blue); color: white; }
+  .preset-btn .icon { font-size: 15px; }
+  .reset-btn {
+    margin-left: auto;
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: white;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--sub);
+    transition: all 0.15s;
+  }
+  .reset-btn:hover { background: #f8fafc; color: var(--text); }
+
+  /* ─── MAIN LAYOUT ─────────────────────────────────── */
+  .main {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 0;
+    height: calc(100vh - 112px);
+    overflow: hidden;
+  }
+
+  /* ─── LEFT: CRITERIA PANEL ────────────────────────── */
+  .criteria-panel {
+    background: var(--card);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 16px 0;
+  }
+  .criteria-panel::-webkit-scrollbar { width: 4px; }
+  .criteria-panel::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+
+  .criteria-section { margin-bottom: 4px; }
+  .criteria-section-header {
+    padding: 8px 20px 6px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--sub);
+    background: #f8fafc;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .criteria-section-header span { opacity: 0.6; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 10px; }
+
+  .criterion-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 20px;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.1s;
+    gap: 10px;
+  }
+  .criterion-row:hover { background: #f8fafc; }
+  .criterion-row.high { background: #eff6ff; }
+  .criterion-row.high:hover { background: #dbeafe; }
+  .criterion-row.low { background: #fff8f8; }
+  .criterion-row.low:hover { background: #fee2e2; }
+
+  .criterion-info { flex: 1; min-width: 0; }
+  .criterion-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .criterion-row.high .criterion-name { color: var(--wv-blue); font-weight: 600; }
+  .criterion-row.low .criterion-name  { color: #9ca3af; }
+  .criterion-meta { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+  .criterion-weight {
+    font-size: 10px;
+    color: var(--sub);
+  }
+  .toggle-priority {
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    border: 1.5px solid var(--border);
+    overflow: hidden;
     flex-shrink: 0;
   }
-  .app-callout-title { font-size: 15px; font-weight: 700; color: #1a237e; margin-bottom: 4px; }
-  .app-callout-desc { font-size: 13px; color: #555; line-height: 1.5; margin-bottom: 12px; }
-  .app-link-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .app-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: #1565c0; color: white;
-    padding: 8px 16px; border-radius: 8px;
-    font-size: 13px; font-weight: 600;
-    text-decoration: none;
-  }
-  .app-link:hover { background: #1a237e; }
-  .app-note { font-size: 11px; color: #888; font-style: italic; }
-
-  .internal-badge {
-    display: inline-block;
-    background: #fff3e0;
-    color: #e65100;
+  .toggle-opt {
+    padding: 4px 8px;
     font-size: 10px;
     font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.12s;
+    user-select: none;
+    letter-spacing: 0.3px;
+    background: white;
+    color: var(--sub);
+    border-left: 1.5px solid var(--border);
+  }
+  .toggle-opt:first-child { border-left: none; }
+  .toggle-opt:hover { background: #f1f5f9; }
+  .toggle-opt.low-opt:hover  { background: #fff1f2; color: #dc2626; }
+  .toggle-opt.norm-opt:hover { background: #f1f5f9; color: var(--text); }
+  .toggle-opt.high-opt:hover { background: #dbeafe; color: var(--wv-blue); }
+  .toggle-opt.low-opt.selected  { background: #fee2e2; color: #dc2626; border-color: #fca5a5; }
+  .toggle-opt.norm-opt.selected { background: #f1f5f9; color: var(--text); }
+  .toggle-opt.high-opt.selected { background: var(--wv-blue); color: white; }
+
+  /* ─── RIGHT: LEADERBOARD ──────────────────────────── */
+  .leaderboard-panel {
+    overflow-y: auto;
+    padding: 20px 24px;
+  }
+  .leaderboard-panel::-webkit-scrollbar { width: 4px; }
+  .leaderboard-panel::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+
+  .lb-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .lb-title { font-size: 15px; font-weight: 700; color: var(--text); }
+  .lb-subtitle { font-size: 12px; color: var(--sub); margin-top: 2px; }
+
+  .workvivo-status {
+    background: var(--wv-blue);
+    color: white;
+    border-radius: 10px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .wv-stat { text-align: center; }
+  .wv-stat-val { font-size: 22px; font-weight: 800; line-height: 1; }
+  .wv-stat-label { font-size: 10px; color: #bfdbfe; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+  .wv-divider { width: 1px; height: 36px; background: rgba(255,255,255,0.2); flex-shrink: 0; }
+  .wv-rank-msg { flex: 1; font-size: 13px; color: #bfdbfe; line-height: 1.4; }
+  .wv-rank-msg strong { color: white; }
+
+  .lb-table { width: 100%; }
+  .lb-row {
+    display: grid;
+    grid-template-columns: 32px 1fr 200px 52px 90px;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    transition: all 0.3s ease;
+  }
+  .lb-row.workvivo-row {
+    background: #eff6ff;
+    border-color: var(--wv-blue);
+    box-shadow: 0 2px 12px rgba(26,86,219,0.12);
+  }
+  .lb-row.rank1 { background: #fffbeb; border-color: #f59e0b; }
+  .lb-row.workvivo-row.rank1 { background: #dbeafe; border-color: var(--wv-blue); box-shadow: 0 4px 16px rgba(26,86,219,0.2); }
+
+  .lb-pos {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--sub);
+    text-align: center;
+  }
+  .lb-pos.p1 { color: #b45309; }
+  .lb-pos.p2 { color: #6b7280; }
+  .lb-pos.p3 { color: #92400e; }
+  .medal { font-size: 18px; }
+
+  .lb-vendor { }
+  .lb-vendor-name { font-size: 14px; font-weight: 600; color: var(--text); }
+  .lb-vendor-name.wv { color: var(--wv-blue); }
+  .lb-badge-wrap { margin-top: 3px; }
+  .lb-badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-left: 8px;
-    vertical-align: middle;
+  }
+  .badge-leader { background: var(--leader-bg); color: var(--leader); }
+  .badge-strong { background: var(--strong-bg); color: var(--strong); }
+  .badge-contender { background: var(--contender-bg); color: var(--contender); }
+
+  .lb-bar-col { }
+  .lb-bar-track {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .lb-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: #94a3b8;
+    transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+  .lb-row.workvivo-row .lb-bar-fill { background: var(--wv-blue); }
+  .lb-row.rank1 .lb-bar-fill { background: #f59e0b; }
+  .lb-row.workvivo-row.rank1 .lb-bar-fill { background: var(--wv-blue); }
+
+  .lb-score {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text);
+    text-align: right;
+  }
+  .lb-row.workvivo-row .lb-score { color: var(--wv-blue); }
+
+  .lb-delta {
+    text-align: right;
+  }
+  .delta-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 7px;
+    border-radius: 6px;
+  }
+  .delta-ahead { background: #dcfce7; color: #15803d; }
+  .delta-behind { background: #fee2e2; color: #dc2626; }
+  .delta-equal { background: #fef3c7; color: #b45309; }
+  .delta-self { background: var(--wv-blue-light); color: var(--wv-blue); font-style: normal; font-weight: 800; }
+
+  .divider-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .divider-row::before, .divider-row::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
   }
 
-  footer {
-    text-align: center;
+  /* ─── SCORE DETAIL TOOLTIP ────────────────────────── */
+  .criteria-tip {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
     font-size: 12px;
-    color: #aaa;
-    margin-top: 16px;
+    color: var(--sub);
+    line-height: 1.5;
   }
+  .criteria-tip strong { color: var(--text); }
+
+  /* ─── RESPONSIVE ──────────────────────────────────── */
+  @media (max-width: 800px) {
+    .main { grid-template-columns: 1fr; height: auto; overflow: visible; }
+    .criteria-panel { height: auto; max-height: none; }
+    .leaderboard-panel { padding: 16px; }
+  }
+
+  /* ─── ANIMATIONS ──────────────────────────────────── */
+  @keyframes pulse-wv {
+    0% { box-shadow: 0 4px 16px rgba(26,86,219,0.2); }
+    50% { box-shadow: 0 4px 20px rgba(26,86,219,0.4); }
+    100% { box-shadow: 0 4px 16px rgba(26,86,219,0.2); }
+  }
+  .lb-row.workvivo-row.rank1 { animation: pulse-wv 2s ease-in-out infinite; }
+  .lb-row { will-change: transform; }
+
 </style>
 </head>
 <body>
-<div class="container">
 
-  <!-- Header -->
-  <div class="header">
-    <div class="header-eyebrow">Sales Enablement · Forrester Wave™ Q2 2026</div>
-    <h1>Workvivo is a Leader — and virtually tied for #1</h1>
-    <div class="header-sub">Use this playbook to show prospects why Workvivo is the right choice, using Forrester's own scoring tool to put us on top.</div>
-  </div>
-
-  <!-- Ranking strip -->
-  <div class="ranking-strip">
-    <div class="rank-card gold">
-      <div class="rank-num big">#3</div>
-      <div class="rank-label">Overall Ranking</div>
-      <div class="rank-detail">Forrester Leader</div>
-    </div>
-    <div class="rank-card">
-      <div class="rank-num">3.88</div>
-      <div class="rank-label">Forrester Score</div>
-      <div class="rank-detail">out of 5.0</div>
-    </div>
-    <div class="rank-card gap">
-      <div class="rank-num">0.01</div>
-      <div class="rank-label">Gap to #1</div>
-      <div class="rank-detail">Simpplr & LumApps (3.89)</div>
-    </div>
-    <div class="rank-card green">
-      <div class="rank-num">0.18</div>
-      <div class="rank-label">Ahead of Unily</div>
-      <div class="rank-detail">4th place (3.70)</div>
-    </div>
-  </div>
-
-  <!-- App callout -->
-  <div class="section-title">Your Call Tool</div>
-  <div class="app-callout">
-    <div class="app-callout-icon">⚡</div>
+<!-- HEADER -->
+<div class="app-header">
+  <div class="header-left">
+    <div class="wv-logo"><svg width="166" height="50" viewBox="0 0 166 50" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_366_1096)"><path d="M69.3107 15.2168H72.4776L68.3672 29.2337H64.8112L62.1154 18.9459L59.4766 29.2337H55.891L51.6392 15.2168H54.8894L57.7792 25.9516L60.3916 15.2168H63.7811L66.5316 25.8979L69.3107 15.2168Z" fill="#00031F"/><path d="M74.1445 22.224C74.1445 17.9623 76.9784 14.9355 80.9508 14.9355C84.9232 14.9355 87.7866 17.9623 87.7866 22.224C87.7866 26.4857 84.9528 29.5113 80.9508 29.5113C76.9488 29.5113 74.1445 26.4846 74.1445 22.224ZM81.0637 26.878C83.1469 26.878 84.5638 25.1674 84.5638 22.224C84.5638 19.2806 83.1469 17.5699 81.0637 17.5699H80.8412C78.7854 17.5699 77.3389 19.2806 77.3389 22.224C77.3389 25.1674 78.7843 26.878 80.8412 26.878H81.0637Z" fill="#00031F"/><path d="M90.8714 29.2333V15.2164H94.011V18.1325C94.5666 16.1983 96.0942 15.0762 98.0382 15.0762H98.9818V18.1029H97.7862C95.3699 18.1029 94.0636 19.4771 94.0636 22.0282V29.2333H90.8682H90.8704H90.8714Z" fill="#00031F"/><path d="M101.511 29.2315V9.60938H104.707V20.7935L110.207 15.2146H114.234L108.704 20.7935L114.511 29.2326H110.676L106.452 23.0663L104.702 24.8043V29.2326H101.507H101.509L101.511 29.2304V29.2315Z" fill="#00031F"/><path d="M126.017 15.2168H129.296L124.351 29.2337H119.988L115.042 15.2168H118.405L122.21 26.5697L126.016 15.2168H126.018H126.017Z" fill="#00031F"/><path d="M131.492 13.0854V9.60938H134.965V13.0854H131.492ZM131.631 29.2304V15.2135H134.827V29.2304H131.631Z" fill="#00031F"/><path d="M148.161 15.2168H151.44L146.494 29.2337H142.132L137.186 15.2168H140.548L144.354 26.5697L148.16 15.2168H148.162H148.161Z" fill="#00031F"/><path d="M152.357 22.224C152.357 17.9623 155.191 14.9355 159.163 14.9355C163.136 14.9355 165.999 17.9623 165.999 22.224C165.999 26.4857 163.165 29.5113 159.163 29.5113C155.161 29.5113 152.357 26.4846 152.357 22.224ZM159.276 26.878C161.359 26.878 162.776 25.1674 162.776 22.224C162.776 19.2806 161.359 17.5699 159.276 17.5699H159.054C156.998 17.5699 155.554 19.2806 155.554 22.224C155.554 25.1674 156.999 26.878 159.054 26.878H159.276Z" fill="#00031F"/><path d="M29.9614 23.3721C29.1274 23.7414 28.1521 23.3622 27.7861 22.5184C27.7861 22.5184 27.7861 22.5162 27.7839 22.5151L24.4098 14.7204C24.046 13.8777 24.4252 12.8969 25.2602 12.5276C26.0941 12.1594 27.0672 12.543 27.4333 13.3846L30.8139 21.1793C31.1799 22.022 30.7986 23.0039 29.9625 23.3721H29.9646H29.9614ZM24.2827 29.5833C23.4488 29.9493 22.4768 29.5647 22.113 28.7209L16.0727 14.716C15.71 13.8733 16.0913 12.8947 16.9274 12.5265C17.7614 12.1583 18.7312 12.5441 19.0961 13.3835V13.3868L25.132 27.3916C25.4925 28.2332 25.1134 29.2129 24.2772 29.5811H24.2805L24.2827 29.5833ZM16.831 28.6639C16.671 29.077 16.3576 29.4047 15.9554 29.5811C15.1215 29.9471 14.1495 29.5636 13.7857 28.722V28.7198L10.382 20.8001C10.0182 19.9574 10.4006 18.9767 11.2356 18.6096C12.0696 18.2435 13.0427 18.6282 13.4076 19.472L16.8113 27.3916C16.9877 27.796 16.9932 28.2551 16.8321 28.665H16.8343L16.8321 28.6628L16.831 28.6639ZM7.80238 14.761C7.80238 13.7846 8.58591 12.9912 9.55572 12.9912C10.5255 12.9912 11.3091 13.7824 11.3091 14.761C11.3091 15.7395 10.5234 16.5307 9.55572 16.5307C8.5881 16.5307 7.80238 15.7385 7.80238 14.761ZM34.508 0H4.585C2.05361 0 1.75546e-06 2.06895 1.75546e-06 4.62444V34.8181C-0.00218992 37.3736 2.04813 39.4448 4.58061 39.448H34.5091C37.0416 39.448 39.0941 37.3791 39.0941 34.8236V4.62444C39.0941 2.06895 37.0416 0 34.5113 0H34.508Z" fill="#00031F"/><path d="M137.013 47.4006H130.487C130.056 47.4006 129.648 47.1716 129.446 46.7815C129.22 46.3355 129.303 45.7996 129.651 45.449L134.19 40.8727H130.94C130.043 40.8727 129.32 40.1429 129.32 39.2388H135.332C135.762 39.2388 136.171 39.4679 136.373 39.858C136.6 40.304 136.516 40.8398 136.168 41.1905L131.629 45.7667H135.394C136.291 45.7667 137.014 46.4966 137.014 47.4006H137.012H137.013ZM162.838 39.1183C161.904 39.1183 161.062 39.5259 160.488 40.1769C159.908 39.5248 159.066 39.1183 158.137 39.1183C156.402 39.1183 154.986 40.613 154.986 42.3565V47.4006C155.882 47.4006 156.605 46.6708 156.605 45.7667V42.339C156.605 41.4974 157.252 40.7851 158.081 40.75C158.956 40.7149 159.68 41.425 159.68 42.3006V45.7678C159.68 46.6719 160.404 47.4017 161.3 47.4017V42.3401C161.3 41.4984 161.946 40.7862 162.776 40.7511C163.651 40.716 164.375 41.4261 164.375 42.3017V45.7689C164.375 46.673 165.098 47.4028 165.995 47.4028V42.3587C165.989 40.6141 164.572 39.1205 162.836 39.1205V39.1172L162.838 39.1183ZM145.186 43.3208C145.186 45.6396 143.316 47.5234 141.016 47.5234C138.716 47.5234 136.846 45.6396 136.846 43.3208C136.846 41.002 138.721 39.1183 141.016 39.1183C143.311 39.1183 145.186 41.002 145.186 43.3208ZM143.566 43.3208C143.566 41.905 142.421 40.75 141.016 40.75C139.611 40.75 138.466 41.9039 138.466 43.3208C138.466 44.7378 139.611 45.8917 141.016 45.8917C142.421 45.8917 143.566 44.7378 143.566 43.3208ZM154.173 43.3208C154.173 45.6396 152.303 47.5234 150.003 47.5234C147.703 47.5234 145.833 45.6396 145.833 43.3208C145.833 41.002 147.708 39.1183 150.003 39.1183C152.298 39.1183 154.173 41.002 154.173 43.3208ZM152.553 43.3208C152.553 41.905 151.408 40.75 150.005 40.75C148.602 40.75 147.455 41.9039 147.455 43.3208C147.455 44.7378 148.6 45.8917 150.005 45.8917C151.41 45.8917 152.553 44.7378 152.553 43.3208Z" fill="#0B5CFF"/><path d="M112.117 43.4271C112.117 43.9159 112.175 44.3411 112.292 44.7016C112.409 45.0534 112.566 45.346 112.761 45.5805C112.956 45.815 113.186 45.9903 113.45 46.1076C113.714 46.215 113.993 46.2687 114.285 46.2687C114.92 46.2687 115.433 46.0199 115.824 45.5213C116.215 45.0128 116.41 44.3148 116.41 43.4261C116.41 42.5373 116.215 41.8437 115.824 41.3451C115.434 40.8464 114.92 40.5977 114.285 40.5977C113.992 40.5977 113.713 40.6569 113.45 40.773C113.186 40.8804 112.957 41.0514 112.761 41.2859C112.566 41.5105 112.409 41.8031 112.292 42.1647C112.175 42.5165 112.117 42.9362 112.117 43.425V43.4271ZM112.175 36.7305V40.6284C112.419 40.2174 112.741 39.9007 113.142 39.6761C113.552 39.4416 114.051 39.3243 114.637 39.3243C115.096 39.3243 115.531 39.4175 115.941 39.6027C116.351 39.7879 116.713 40.0574 117.025 40.4081C117.337 40.7599 117.582 41.1894 117.758 41.6979C117.943 42.2064 118.036 42.7817 118.036 43.4271C118.036 44.0726 117.943 44.6479 117.758 45.1564C117.582 45.6638 117.338 46.0988 117.025 46.4604C116.713 46.8122 116.351 47.0807 115.941 47.2659C115.531 47.4511 115.096 47.5442 114.637 47.5442C114.051 47.5442 113.553 47.4324 113.142 47.2067C112.742 46.9722 112.419 46.65 112.175 46.2402V47.3535H110.65V36.7305H112.175ZM119.013 49.9178V48.7014H119.613C119.818 48.7014 119.995 48.6916 120.14 48.6718C120.297 48.6521 120.434 48.6028 120.55 48.525C120.667 48.4472 120.775 48.3299 120.872 48.1732C120.97 48.0165 121.067 47.7974 121.165 47.5135L121.224 47.3382L118.382 39.4701H120.067L121.972 45.346L123.832 39.4701H125.415L122.63 47.5289C122.464 47.9979 122.302 48.3836 122.147 48.6861C122 48.9885 121.819 49.2329 121.604 49.4192C121.399 49.6044 121.145 49.7315 120.843 49.8006C120.549 49.8784 120.183 49.9178 119.744 49.9178H119.012H119.013Z" fill="#00031F"/></g><defs><clipPath id="clip0_366_1096"><rect width="166" height="49.9188" fill="white"/></clipPath></defs></svg></div>
     <div>
-      <div class="app-callout-title">Forrester Wave Scoring Reference Tool</div>
-      <div class="app-callout-desc">
-        A Workvivo-created visualisation tool built from the publicly published Forrester Wave™: Intranet Platforms, Q2 2026 report. Displays the full vendor leaderboard and allows criteria to be prioritised by business area — helping prospects see how platforms compare based on what matters most to their organisation.
-      </div>
-      <div class="app-link-row">
-        <span class="app-note">📌 Open the tool separately in your browser before the call. URL to be added by your manager or enablement team.</span>
-      </div>
+      <div class="header-title">Forrester Wave™: Intranet Platforms</div>
+      <div class="header-sub">Q2 2026 · Interactive Scoring Tool</div>
     </div>
   </div>
-
-  <!-- Leaderboard -->
-  <div class="section-title">Full Leaderboard</div>
-  <div class="leaderboard">
-    <div class="lb-row">
-      <div class="lb-pos top">1</div>
-      <div class="lb-name">LumApps</div>
-      <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-bar-fill" style="width:100%"></div></div></div>
-      <div class="lb-score">3.89</div>
-      <span class="lb-badge badge-leader">Leader</span>
-    </div>
-    <div class="lb-row">
-      <div class="lb-pos top">1</div>
-      <div class="lb-name">Simpplr</div>
-      <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-bar-fill" style="width:100%"></div></div></div>
-      <div class="lb-score">3.89</div>
-      <span class="lb-badge badge-leader">Leader</span>
-    </div>
-    <div class="lb-row workvivo">
-      <div class="lb-pos top">3</div>
-      <div class="lb-name wv">⚡ Workvivo</div>
-      <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-bar-fill wv" style="width:99.7%"></div></div></div>
-      <div class="lb-score">3.88</div>
-      <span class="lb-badge badge-leader">Leader</span>
-    </div>
-    <div class="lb-row">
-      <div class="lb-pos top">4</div>
-      <div class="lb-name">Unily</div>
-      <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-bar-fill" style="width:95.1%"></div></div></div>
-      <div class="lb-score">3.70</div>
-      <span class="lb-badge badge-leader">Leader</span>
-    </div>
-    <div class="lb-row">
-      <div class="lb-pos">5</div>
-      <div class="lb-name">Interact</div>
-      <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-bar-fill" style="width:87.4%"></div></div></div>
-      <div class="lb-score">3.40</div>
-      <span class="lb-badge badge-strong">Strong Performer</span>
-    </div>
-    <div class="lb-row">
-      <div class="lb-pos">6</div>
-      <div class="lb-name">MangoApps</div>
-      <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-bar-fill" style="width:84.8%"></div></div></div>
-      <div class="lb-score">3.30</div>
-      <span class="lb-badge badge-strong">Strong Performer</span>
-    </div>
-    <div class="lb-row">
-      <div class="lb-pos">7</div>
-      <div class="lb-name">Appspace</div>
-      <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-bar-fill" style="width:84.3%"></div></div></div>
-      <div class="lb-score">3.28</div>
-      <span class="lb-badge badge-strong">Strong Performer</span>
-    </div>
-    <div class="lb-row">
-      <div class="lb-pos">8</div>
-      <div class="lb-name">Staffbase</div>
-      <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-bar-fill" style="width:81.5%"></div></div></div>
-      <div class="lb-score">3.17</div>
-      <span class="lb-badge badge-strong">Strong Performer</span>
-    </div>
-    <div class="lb-row">
-      <div class="lb-pos">9</div>
-      <div class="lb-name">Firstup</div>
-      <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-bar-fill" style="width:75.6%"></div></div></div>
-      <div class="lb-score">2.94</div>
-      <span class="lb-badge badge-strong">Strong Performer</span>
-    </div>
-    <div class="lb-row">
-      <div class="lb-pos">10</div>
-      <div class="lb-name">Microsoft</div>
-      <div class="lb-bar-wrap"><div class="lb-bar"><div class="lb-bar-fill" style="width:70.2%"></div></div></div>
-      <div class="lb-score">2.73</div>
-      <span class="lb-badge badge-strong">Strong Performer</span>
-    </div>
-  </div>
-
-  <!-- How to use the app -->
-  <div class="section-title">How to run the app on a call</div>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-text"><strong>Before the call:</strong> Open the tool in a browser tab and keep it ready. It displays only published Forrester vendor names and scores — no internal Workvivo information is visible.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-text"><strong>Walk the prospect through the leaderboard.</strong> In Forrester's default view, Workvivo is ranked a Leader at #3 — just 0.01 points from joint first place.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-text"><strong>Select the relevant focus area</strong> — either <strong>HR & Communications</strong> or <strong>IT & Technical</strong> — to filter the leaderboard by the criteria most relevant to that buyer's priorities.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-text"><strong>Ask the prospect:</strong> <em>"Are there any other capabilities that are especially important to your organisation?"</em> — then add those criteria to the view so the comparison reflects their specific evaluation criteria.</div>
-    </div>
-  </div>
-
-  <!-- Persona playbooks -->
-  <div class="section-title">Persona Playbooks — Which Criteria to Prioritise <span class="internal-badge">Internal Only</span></div>
-  <div class="persona-grid">
-
-    <!-- HR & Comms -->
-    <div class="persona-card">
-      <div class="persona-header">
-        <div class="persona-icon icon-hr">📣</div>
-        <div>
-          <div class="persona-title">HR & Comms</div>
-          <div class="persona-sub">IC leads, People teams, Comms Managers</div>
-        </div>
-      </div>
-      <div class="tag-label">Set to HIGH →</div>
-      <div class="tags">
-        <span class="tag tag-high">Internal Communications</span>
-        <span class="tag tag-high">Collaboration</span>
-        <span class="tag tag-high">Personalization</span>
-        <span class="tag tag-high">Employee Listening</span>
-      </div>
-      <div class="tip-box">
-        <strong>Why it works:</strong> Workvivo scores 5/5 on all four. Setting these to HIGH puts us at #1 before the prospect even adds their own priorities — and gives you headroom to invite 2–3 more of their top criteria.
-      </div>
-    </div>
-
-    <!-- IT -->
-    <div class="persona-card">
-      <div class="persona-header">
-        <div class="persona-icon icon-it">🛠️</div>
-        <div>
-          <div class="persona-title">IT</div>
-          <div class="persona-sub">CIOs, IT Directors, Platform Owners</div>
-        </div>
-      </div>
-      <div class="tag-label">Set to HIGH →</div>
-      <div class="tags">
-        <span class="tag tag-high">Vision</span>
-        <span class="tag tag-high">Innovation</span>
-        <span class="tag tag-high">Roadmap</span>
-        <span class="tag tag-high">Productivity Integrations</span>
-        <span class="tag tag-high">Governance</span>
-        <span class="tag tag-high">Enterprise App Integrations</span>
-      </div>
-      <div class="tip-box">
-        <strong>Why it works:</strong> Workvivo scores 5/5 on Vision, Innovation, Roadmap, and Productivity Integrations — signalling a modern, future-proof platform built to replace legacy intranets.
-      </div>
-      <div class="warn-box">
-        <strong>Watch out — AI Agents & Assistants (score: 1).</strong> If AI is their top priority, don't avoid it — lean in: position Workvivo as the transformational platform of the future, with AI capabilities actively on the roadmap, rather than a legacy tool patching on AI as an afterthought.
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Score reference table -->
-  <div class="section-title">Workvivo Score Reference — Full Breakdown <span class="internal-badge">Internal Only</span></div>
-  <div class="score-table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Criterion</th>
-          <th>Category</th>
-          <th>Weight</th>
-          <th>Workvivo Score</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Internal Communications</strong></td><td>Current Offering</td><td class="wt">7%</td><td class="score-5">5 / 5 ★</td></tr>
-        <tr><td><strong>Collaboration</strong></td><td>Current Offering</td><td class="wt">3%</td><td class="score-5">5 / 5 ★</td></tr>
-        <tr><td><strong>Personalization</strong></td><td>Current Offering</td><td class="wt">4%</td><td class="score-5">5 / 5 ★</td></tr>
-        <tr><td><strong>Employee Listening</strong></td><td>Current Offering</td><td class="wt">5%</td><td class="score-5">5 / 5 ★</td></tr>
-        <tr><td><strong>Productivity App Integrations</strong></td><td>Current Offering</td><td class="wt">4%</td><td class="score-5">5 / 5 ★</td></tr>
-        <tr><td><strong>Vision</strong></td><td>Strategy</td><td class="wt">20%</td><td class="score-5">5 / 5 ★</td></tr>
-        <tr><td><strong>Innovation</strong></td><td>Strategy</td><td class="wt">20%</td><td class="score-5">5 / 5 ★</td></tr>
-        <tr><td><strong>Roadmap</strong></td><td>Strategy</td><td class="wt">20%</td><td class="score-5">5 / 5 ★</td></tr>
-        <tr><td><strong>Partner Ecosystem</strong></td><td>Strategy</td><td class="wt">10%</td><td class="score-5">5 / 5 ★</td></tr>
-        <tr><td>Content & Repository Services</td><td>Current Offering</td><td class="wt">3%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Metadata</td><td>Current Offering</td><td class="wt">5%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>AI-Enabled Search</td><td>Current Offering</td><td class="wt">5%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Governance</td><td>Current Offering</td><td class="wt">5%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Enterprise App Integrations</td><td>Current Offering</td><td class="wt">5%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Reporting & Analytics</td><td>Current Offering</td><td class="wt">5%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Frontline Worker Support</td><td>Current Offering</td><td class="wt">5%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Audience Segmentation</td><td>Current Offering</td><td class="wt">5%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Branding & Templating</td><td>Current Offering</td><td class="wt">5%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Delegated Administration</td><td>Current Offering</td><td class="wt">6%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Experience Touchpoints</td><td>Current Offering</td><td class="wt">4%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Employee Journeys</td><td>Current Offering</td><td class="wt">6%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Developer Resources</td><td>Current Offering</td><td class="wt">6%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Rewards & Recognition</td><td>Current Offering</td><td class="wt">2%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Campaigns & Calendaring</td><td>Current Offering</td><td class="wt">5%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Adoption</td><td>Strategy</td><td class="wt">15%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Pricing Flexibility & Transparency</td><td>Strategy</td><td class="wt">5%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td>Supporting Services & Offerings</td><td>Strategy</td><td class="wt">10%</td><td class="score-3">3 / 5</td></tr>
-        <tr><td><strong>⚠ AI Agents & Assistants</strong></td><td>Current Offering</td><td class="wt">5%</td><td class="score-1">1 / 5</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <footer>Workvivo Sales Enablement · Based on publicly published Forrester Wave™: Intranet Platforms, Q2 2026 report data</footer>
+  <div class="header-badge">Vendor Comparison · Q2 2026</div>
 </div>
+
+<!-- PRESET BAR -->
+<div class="preset-bar">
+  <span class="preset-label">What matters most to your organisation?</span>
+  <button class="preset-btn" id="preset-hr" onclick="applyPreset('hr')">
+    <span class="icon">📣</span> HR &amp; Communications
+  </button>
+  <button class="preset-btn" id="preset-it" onclick="applyPreset('it')">
+    <span class="icon">🛠️</span> IT &amp; Technical
+  </button>
+  <button class="preset-btn" id="preset-custom" onclick="applyPreset('custom')" style="display:none">
+    <span class="icon">✏️</span> Custom
+  </button>
+  <button class="reset-btn" onclick="applyPreset('reset')">↺ Reset all priorities</button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LEFT: CRITERIA PANEL -->
+  <div class="criteria-panel" id="criteria-panel">
+    <!-- Injected by JS -->
+  </div>
+
+  <!-- RIGHT: LEADERBOARD -->
+  <div class="leaderboard-panel">
+    <div class="lb-header">
+      <div>
+        <div class="lb-title">Live Leaderboard</div>
+        <div class="lb-subtitle">Scores update instantly as you adjust criteria importance</div>
+      </div>
+    </div>
+
+    <!-- Workvivo status bar -->
+    <div class="workvivo-status" id="wv-status">
+      <!-- Injected by JS -->
+    </div>
+
+    <!-- Criteria tip -->
+    <div class="criteria-tip">
+      💡 Select a focus area above, or use the <strong>LOW / NORM / HIGH</strong> controls to adjust which criteria are included in the comparison. Based on the publicly published Forrester Wave™: Intranet Platforms, Q2 2026 report.
+    </div>
+
+    <!-- Leaderboard rows -->
+    <div class="lb-table" id="leaderboard">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+//  DATA
+// ─────────────────────────────────────────────
+
+const VENDORS = [
+  { name: 'LumApps',    forrester: 'Leader' },
+  { name: 'Simpplr',    forrester: 'Leader' },
+  { name: 'Workvivo',   forrester: 'Leader',           isUs: true },
+  { name: 'Unily',      forrester: 'Leader' },
+  { name: 'Interact',   forrester: 'Strong Performer' },
+  { name: 'MangoApps',  forrester: 'Strong Performer' },
+  { name: 'Appspace',   forrester: 'Strong Performer' },
+  { name: 'Staffbase',  forrester: 'Strong Performer' },
+  { name: 'Firstup',    forrester: 'Strong Performer' },
+  { name: 'Microsoft',  forrester: 'Strong Performer' },
+  { name: 'Axero',      forrester: 'Contender' },
+  { name: 'Akumina',    forrester: 'Contender' },
+  { name: 'Haiilo',     forrester: 'Contender' },
+];
+
+// Score order: Akumina[0], Appspace[1], Axero[2], Firstup[3], Haiilo[4], Interact[5],
+//              LumApps[6], MangoApps[7], Microsoft[8], Simpplr[9], Staffbase[10], Unily[11], Workvivo[12]
+const VENDOR_IDX = {
+  'LumApps':6,'Simpplr':9,'Workvivo':12,'Unily':11,'Interact':5,
+  'MangoApps':7,'Appspace':1,'Staffbase':10,'Firstup':3,'Microsoft':8,
+  'Axero':2,'Akumina':0,'Haiilo':4
+};
+
+const CURRENT_OFFERING = [
+  { id:'content',       name:'Content & Repository Services',      baseWeight:0.03, scores:[1,3,1,3,3,3,5,3,5,3,3,5,3] },
+  { id:'metadata',      name:'Metadata',                           baseWeight:0.05, scores:[1,3,1,3,1,5,3,5,3,5,3,5,3] },
+  { id:'ai-search',     name:'AI-Enabled Search',                  baseWeight:0.05, scores:[3,3,1,3,1,3,5,3,3,5,5,3,3] },
+  { id:'governance',    name:'Governance',                         baseWeight:0.05, scores:[1,3,3,1,3,3,3,5,1,5,3,3,3] },
+  { id:'ent-apps',      name:'Enterprise App Integrations',        baseWeight:0.05, scores:[3,3,1,1,3,3,3,5,3,5,3,3,3] },
+  { id:'prod-apps',     name:'Productivity App Integrations',      baseWeight:0.04, scores:[1,3,1,3,1,3,5,3,3,5,3,3,5] },
+  { id:'analytics',     name:'Reporting & Analytics',              baseWeight:0.05, scores:[1,3,1,3,1,3,5,3,1,5,3,3,3] },
+  { id:'ai-agents',     name:'AI Agents & Assistants',             baseWeight:0.05, scores:[3,3,3,1,1,5,5,3,3,3,3,1,1] },
+  { id:'frontline',     name:'Frontline Worker Support',           baseWeight:0.05, scores:[3,5,1,3,1,3,3,5,1,3,5,5,3] },
+  { id:'audience',      name:'Audience Segmentation',              baseWeight:0.05, scores:[1,5,3,5,1,5,3,3,1,3,5,5,3] },
+  { id:'personalize',   name:'Personalization',                    baseWeight:0.04, scores:[1,5,1,3,3,3,3,3,1,5,3,3,5] },
+  { id:'collab',        name:'Collaboration',                      baseWeight:0.03, scores:[1,3,3,1,3,3,3,5,5,3,3,3,5] },
+  { id:'int-comms',     name:'Internal Communications',            baseWeight:0.07, scores:[1,3,3,5,3,3,3,3,1,5,5,3,5] },
+  { id:'branding',      name:'Branding & Templating',              baseWeight:0.05, scores:[5,3,1,3,3,5,3,3,1,3,3,5,3] },
+  { id:'deleg-admin',   name:'Delegated Administration',           baseWeight:0.06, scores:[3,3,5,3,3,3,5,3,1,3,3,5,3] },
+  { id:'exp-touch',     name:'Experience Touchpoints',             baseWeight:0.04, scores:[5,3,3,3,1,5,3,3,1,3,3,5,3] },
+  { id:'emp-journey',   name:'Employee Journeys',                  baseWeight:0.06, scores:[1,1,3,5,1,1,3,3,1,5,3,5,3] },
+  { id:'dev-res',       name:'Developer Resources',                baseWeight:0.06, scores:[3,3,3,1,1,3,5,3,5,5,3,5,3] },
+  { id:'rewards',       name:'Rewards & Recognition',              baseWeight:0.02, scores:[1,3,3,3,3,5,3,5,1,5,3,3,3] },
+  { id:'listening',     name:'Employee Listening',                 baseWeight:0.05, scores:[1,1,3,3,1,3,3,3,5,5,3,3,5] },
+  { id:'campaigns',     name:'Campaigns & Calendaring',            baseWeight:0.05, scores:[3,3,1,5,1,5,3,3,1,3,3,3,3] },
+];
+
+const STRATEGY = [
+  { id:'vision',      name:'Vision',                          baseWeight:0.20, scores:[1,5,1,3,1,3,3,3,5,3,3,3,5] },
+  { id:'innovation',  name:'Innovation',                      baseWeight:0.20, scores:[1,3,3,3,1,3,5,3,3,5,3,3,5] },
+  { id:'roadmap',     name:'Roadmap',                         baseWeight:0.20, scores:[1,3,1,3,1,3,5,3,3,3,3,5,5] },
+  { id:'partner',     name:'Partner Ecosystem',               baseWeight:0.10, scores:[3,3,1,3,3,1,3,3,5,3,3,3,5] },
+  { id:'adoption',    name:'Adoption',                        baseWeight:0.15, scores:[1,3,3,3,3,5,5,3,1,5,3,3,3] },
+  { id:'pricing',     name:'Pricing Flexibility',             baseWeight:0.05, scores:[1,5,3,1,3,3,3,5,5,1,3,3,3] },
+  { id:'services',    name:'Supporting Services & Offerings', baseWeight:0.10, scores:[3,3,3,3,1,5,3,3,1,3,3,5,3] },
+];
+
+const PRESETS = {
+  hr: { ids: ['int-comms','collab','personalize','listening'] },
+  it: { ids: ['vision','innovation','roadmap','prod-apps','governance','ent-apps'] },
+};
+
+// ─────────────────────────────────────────────
+//  STATE
+// ─────────────────────────────────────────────
+
+// priorities: { [id]: 'high' | 'norm' | 'low' }  (default = 'norm' if absent)
+let priorities = {};
+let activePreset = null;
+
+// ─────────────────────────────────────────────
+//  SCORING ENGINE
+// ─────────────────────────────────────────────
+
+// Scoring: criteria are weighted globally (Current Offering 50%, Strategy 50%).
+//   HIGH = include only these criteria (normalised among themselves)
+//   NORM = include all criteria at published weights (default view)
+//   LOW  = exclude this criterion from the comparison
+
+function calcScores() {
+  const allCriteria = [
+    ...CURRENT_OFFERING.map(c => ({ ...c, gw: c.baseWeight * 0.5 })),
+    ...STRATEGY.map(c =>          ({ ...c, gw: c.baseWeight * 0.5 })),
+  ];
+  const p         = id => priorities[id] || 'norm';
+  const available = allCriteria.filter(c => p(c.id) !== 'low');
+  const hasHigh   = available.some(c => p(c.id) === 'high');
+  const active    = hasHigh ? available.filter(c => p(c.id) === 'high') : available;
+  const totalW    = active.reduce((s, c) => s + c.gw, 0);
+
+  return VENDORS.map(vendor => {
+    const vi    = VENDOR_IDX[vendor.name];
+    const score = totalW === 0 ? 0 : active.reduce((s, c) => s + (c.gw / totalW) * c.scores[vi], 0);
+    return { ...vendor, score };
+  });
+}
+
+// ─────────────────────────────────────────────
+//  RENDER CRITERIA PANEL
+// ─────────────────────────────────────────────
+
+function renderCriteria() {
+  const panel = document.getElementById('criteria-panel');
+
+  let html = '';
+
+  function criterionRow(c) {
+    const p = priorities[c.id] || 'norm';
+    return `
+    <div class="criterion-row ${p}" id="row-${c.id}">
+      <div class="criterion-info">
+        <div class="criterion-name" title="${c.name}">${c.name}</div>
+        <div class="criterion-meta">
+          <span class="criterion-weight">Report weight: ${Math.round(c.baseWeight*100)}%</span>
+        </div>
+      </div>
+      <div class="toggle-priority">
+        <div class="toggle-opt low-opt  ${p==='low'  ? 'selected' : ''}" onclick="setPriority('${c.id}','low')">LOW</div>
+        <div class="toggle-opt norm-opt ${p==='norm' ? 'selected' : ''}" onclick="setPriority('${c.id}','norm')">NORM</div>
+        <div class="toggle-opt high-opt ${p==='high' ? 'selected' : ''}" onclick="setPriority('${c.id}','high')">HIGH</div>
+      </div>
+    </div>`;
+  }
+
+  // Current offering section
+  html += `<div class="criteria-section">
+    <div class="criteria-section-header">Current Offering</div>`;
+  CURRENT_OFFERING.forEach(c => { html += criterionRow(c); });
+  html += `</div>`;
+
+  // Strategy section
+  html += `<div class="criteria-section">
+    <div class="criteria-section-header">Strategy</div>`;
+  STRATEGY.forEach(c => { html += criterionRow(c); });
+  html += `</div>`;
+
+  panel.innerHTML = html;
+}
+
+// ─────────────────────────────────────────────
+//  RENDER LEADERBOARD
+// ─────────────────────────────────────────────
+
+function renderLeaderboard() {
+  const scores = calcScores();
+  scores.sort((a, b) => b.score - a.score);
+
+  const maxScore = scores[0].score;
+  const wvEntry = scores.find(s => s.isUs);
+  const wvRank = scores.indexOf(wvEntry) + 1;
+  const wvScore = wvEntry.score;
+  const leaderScore = scores[0].score;
+  const gapToLeader = leaderScore - wvScore;
+  const aheadOf4th = wvScore - (scores.find(s => !s.isUs && scores.indexOf(scores.find(s2=>s2.name===s.name))+1 > wvRank)?.score ?? 0);
+
+  // Workvivo status bar
+  let statusMsg = '';
+  if (wvRank === 1) {
+    statusMsg = `<strong>Workvivo ranks #1</strong> across the selected criteria — ${(wvScore - scores[1].score).toFixed(2)} points ahead of ${scores[1].name}.`;
+  } else if (wvRank === 2) {
+    statusMsg = `<strong>Workvivo ranks #2</strong> — ${gapToLeader.toFixed(2)} points behind ${scores[0].name} on the selected criteria.`;
+  } else {
+    statusMsg = `<strong>Workvivo ranks #${wvRank}</strong> — ${gapToLeader.toFixed(2)} points from the top on the selected criteria.`;
+  }
+
+  const nextAbove = wvRank > 1 ? scores[wvRank - 2] : null;
+  const nextBelow = wvRank < scores.length ? scores[wvRank] : null;
+
+  document.getElementById('wv-status').innerHTML = `
+    <div class="wv-stat">
+      <div class="wv-stat-val">#${wvRank}</div>
+      <div class="wv-stat-label">Current Rank</div>
+    </div>
+    <div class="wv-divider"></div>
+    <div class="wv-stat">
+      <div class="wv-stat-val">${wvScore.toFixed(2)}</div>
+      <div class="wv-stat-label">Score / 5.0</div>
+    </div>
+    ${gapToLeader > 0.001 ? `
+    <div class="wv-divider"></div>
+    <div class="wv-stat">
+      <div class="wv-stat-val">${gapToLeader.toFixed(2)}</div>
+      <div class="wv-stat-label">Gap to #1</div>
+    </div>` : ''}
+    <div class="wv-divider"></div>
+    <div class="wv-rank-msg">${statusMsg}</div>
+  `;
+
+  // Build leaderboard
+  let lb = '';
+  let lastSection = '';
+
+  scores.forEach((vendor, idx) => {
+    const rank = idx + 1;
+    const section = vendor.forrester;
+
+    if (section !== lastSection) {
+      if (lastSection !== '') lb += `<div class="divider-row">${section}</div>`;
+      else lb += `<div class="divider-row">${section}</div>`;
+      lastSection = section;
+    }
+
+    const pct = (vendor.score / 5) * 100;
+    const posClass = rank === 1 ? 'p1' : rank === 2 ? 'p2' : rank === 3 ? 'p3' : '';
+    const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '';
+    const isUs = vendor.isUs;
+
+    let deltaHtml = '';
+    if (isUs) {
+      deltaHtml = `<div class="delta-badge delta-self">Workvivo</div>`;
+    } else {
+      const diff = vendor.score - wvScore;
+      if (Math.abs(diff) < 0.005) {
+        deltaHtml = `<div class="delta-badge delta-equal">Tied</div>`;
+      } else if (diff > 0) {
+        deltaHtml = `<div class="delta-badge delta-behind">+${diff.toFixed(2)}</div>`;
+      } else {
+        deltaHtml = `<div class="delta-badge delta-ahead">−${Math.abs(diff).toFixed(2)}</div>`;
+      }
+    }
+
+    const badgeClass = section === 'Leader' ? 'badge-leader' : section === 'Strong Performer' ? 'badge-strong' : 'badge-contender';
+    const rowClass = `lb-row${isUs ? ' workvivo-row' : ''}${rank === 1 ? ' rank1' : ''}`;
+
+    lb += `
+    <div class="${rowClass}" data-vendor="${vendor.name}" id="lb-${vendor.name.replace(/\s/g,'-')}">
+      <div class="lb-pos ${posClass}">${medal || rank}</div>
+      <div class="lb-vendor">
+        <div class="lb-vendor-name${isUs ? ' wv' : ''}">${vendor.name}${isUs ? ' ⚡' : ''}</div>
+        <div class="lb-badge-wrap"><span class="lb-badge ${badgeClass}">${section}</span></div>
+      </div>
+      <div class="lb-bar-col">
+        <div class="lb-bar-track">
+          <div class="lb-bar-fill" style="width:${pct}%"></div>
+        </div>
+      </div>
+      <div class="lb-score">${vendor.score.toFixed(2)}</div>
+      <div class="lb-delta">${deltaHtml}</div>
+    </div>`;
+  });
+
+  document.getElementById('leaderboard').innerHTML = lb;
+}
+
+// ─────────────────────────────────────────────
+//  INTERACTIONS
+// ─────────────────────────────────────────────
+
+function setPriority(id, level) {
+  if (level === 'norm') {
+    delete priorities[id];
+  } else {
+    priorities[id] = level;
+  }
+  activePreset = checkPresetMatch() || (Object.keys(priorities).length > 0 ? 'custom' : null);
+  updatePresetButtons();
+  renderCriteria();
+  renderLeaderboard();
+}
+
+function checkPresetMatch() {
+  for (const [key, preset] of Object.entries(PRESETS)) {
+    const highIds = Object.entries(priorities).filter(([,v]) => v === 'high').map(([k]) => k);
+    const lowIds  = Object.entries(priorities).filter(([,v]) => v === 'low').map(([k]) => k);
+    if (lowIds.length === 0 && highIds.length === preset.ids.length && preset.ids.every(id => priorities[id] === 'high')) {
+      return key;
+    }
+  }
+  return null;
+}
+
+function applyPreset(name) {
+  if (name === 'reset') {
+    priorities = {};
+    activePreset = null;
+  } else if (name === 'custom') {
+    activePreset = 'custom';
+  } else if (PRESETS[name]) {
+    priorities = {};
+    PRESETS[name].ids.forEach(id => { priorities[id] = 'high'; });
+    activePreset = name;
+  }
+  updatePresetButtons();
+  renderCriteria();
+  renderLeaderboard();
+}
+
+function updatePresetButtons() {
+  document.getElementById('preset-hr').classList.toggle('active', activePreset === 'hr');
+  document.getElementById('preset-it').classList.toggle('active', activePreset === 'it');
+  const customBtn = document.getElementById('preset-custom');
+  if (activePreset === 'custom') {
+    customBtn.style.display = 'flex';
+    customBtn.classList.add('active');
+  } else {
+    customBtn.style.display = 'none';
+  }
+}
+
+// ─────────────────────────────────────────────
+//  INIT
+// ─────────────────────────────────────────────
+
+renderCriteria();
+renderLeaderboard();
+</script>
 </body>
 </html>
