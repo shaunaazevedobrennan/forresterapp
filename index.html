@@ -416,6 +416,9 @@
   <button class="preset-btn" id="preset-it" onclick="applyPreset('it')">
     <span class="icon">🛠️</span> IT &amp; Technical
   </button>
+  <button class="preset-btn" id="preset-ai" onclick="applyPreset('ai')">
+    <span class="icon">🤖</span> AI &amp; Innovation
+  </button>
   <button class="preset-btn" id="preset-custom" onclick="applyPreset('custom')" style="display:none">
     <span class="icon">✏️</span> Custom
   </button>
@@ -520,8 +523,9 @@ const STRATEGY = [
 ];
 
 const PRESETS = {
-  hr: { ids: ['int-comms','collab','personalize','listening'] },
-  it: { ids: ['vision','innovation','roadmap','prod-apps','governance','ent-apps'] },
+  hr: { highIds: ['int-comms','collab','personalize','listening'],           lowIds: [] },
+  it: { highIds: ['vision','innovation','roadmap','prod-apps','governance','ent-apps'], lowIds: [] },
+  ai: { highIds: ['vision','innovation','roadmap','ai-agents','ai-search'],  lowIds: [] },
 };
 
 // ─────────────────────────────────────────────
@@ -723,12 +727,12 @@ function setPriority(id, level) {
 }
 
 function checkPresetMatch() {
+  const currentHighIds = Object.entries(priorities).filter(([,v]) => v === 'high').map(([k]) => k);
+  const currentLowIds  = Object.entries(priorities).filter(([,v]) => v === 'low').map(([k]) => k);
   for (const [key, preset] of Object.entries(PRESETS)) {
-    const highIds = Object.entries(priorities).filter(([,v]) => v === 'high').map(([k]) => k);
-    const lowIds  = Object.entries(priorities).filter(([,v]) => v === 'low').map(([k]) => k);
-    if (lowIds.length === 0 && highIds.length === preset.ids.length && preset.ids.every(id => priorities[id] === 'high')) {
-      return key;
-    }
+    const highMatch = currentHighIds.length === preset.highIds.length && preset.highIds.every(id => priorities[id] === 'high');
+    const lowMatch  = currentLowIds.length  === preset.lowIds.length  && preset.lowIds.every(id  => priorities[id] === 'low');
+    if (highMatch && lowMatch) return key;
   }
   return null;
 }
@@ -741,7 +745,8 @@ function applyPreset(name) {
     activePreset = 'custom';
   } else if (PRESETS[name]) {
     priorities = {};
-    PRESETS[name].ids.forEach(id => { priorities[id] = 'high'; });
+    PRESETS[name].highIds.forEach(id => { priorities[id] = 'high'; });
+    PRESETS[name].lowIds.forEach(id  => { priorities[id] = 'low';  });
     activePreset = name;
   }
   updatePresetButtons();
@@ -752,6 +757,7 @@ function applyPreset(name) {
 function updatePresetButtons() {
   document.getElementById('preset-hr').classList.toggle('active', activePreset === 'hr');
   document.getElementById('preset-it').classList.toggle('active', activePreset === 'it');
+  document.getElementById('preset-ai').classList.toggle('active', activePreset === 'ai');
   const customBtn = document.getElementById('preset-custom');
   if (activePreset === 'custom') {
     customBtn.style.display = 'flex';
